@@ -1,29 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Utilities;
-using Newtonsoft.Json;
+using System.Web;
 using System.Xml;
 using System.Xml.XPath;
-using System.Xml.Linq;
 using System.Net;
 using System.Text;
 
-namespace Bot_Application2
+namespace WeatherAPI
 {
     class Weather
     {
 
         public static string WeatherInfo(string zip)
         {
-                string weatherRequest = "http://api.wunderground.com/api/98dfafcf9efb4a27/conditions/q/" + zip + ".xml";
-                XmlDocument weatherResponse = MakeRequest(weatherRequest);
-                return ProcessResponse(weatherResponse);
+            string weatherRequest = "http://api.wunderground.com/api/98dfafcf9efb4a27/conditions/q/" + zip + ".xml";
+            XmlDocument weatherResponse = MakeRequest(weatherRequest);
+            return ProcessResponse(weatherResponse);
         }
 
         public static XmlDocument MakeRequest(string requestUrl)
@@ -46,7 +39,7 @@ namespace Bot_Application2
                 return null;
             }
         }
-         public static string ProcessResponse(XmlDocument weatherResponse)
+        public static string ProcessResponse(XmlDocument weatherResponse)
         {
             XmlNode temp = weatherResponse.SelectSingleNode("/response/current_observation");
             XmlNode city = weatherResponse.SelectSingleNode("/response/current_observation/display_location");
@@ -55,18 +48,7 @@ namespace Bot_Application2
             string cur_city = city["city"].InnerText;
 
             return "The temperature in " + cur_city + " is " + tempf + " F.";
-           
-        }
-    }
 
-    [BotAuthentication]
-    public class MessagesController : ApiController
-    {
-        public async Task<Message> Post([FromBody]Message message)
-        {
-                string text = message.Text;
-                string result =  Weather.WeatherInfo(text);
-                return message.CreateReplyMessage(result);        
-        }       
+        }
     }
 }
