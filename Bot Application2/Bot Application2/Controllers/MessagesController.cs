@@ -24,7 +24,6 @@ namespace Bot_Application2
         bool showDecks = false;
         bool slideStarted = false;
         int index = 0;
-        //List<Slide> copy;
         List<Slide> slideCollection;
         public async Task StartAsync(IDialogContext context)
         {
@@ -51,16 +50,37 @@ namespace Bot_Application2
                     var message = await argument;
                     TestType slides = new TestType();
                     slideCollection = slides.GetSlides(message.Text);
-                   // copy = slideCollection;
-                    await context.PostAsync("Type omething to start");
+                    await context.PostAsync("Type something to start");
                     context.Wait(MessageReceivedAsync);
                 
                 } else
                 {
-                    string name = slideCollection[index].caption;
-                    index++;
-                    await context.PostAsync(name);
-                    context.Wait(MessageReceivedAsync);
+                    if (index==0)
+                    {
+                        string name = slideCollection[index].caption;
+                        index++;
+                        await context.PostAsync(name);
+                        context.Wait(MessageReceivedAsync);
+                    } else
+                    {
+                        if (index < slideCollection.Count)
+                        {
+                            var message = await argument;
+                            string name = slideCollection[index].caption;
+                            index++;
+                            slideCollection[index - 1].time_taken = 600;
+                            slideCollection[index - 1].response = Convert.ToBoolean(message.Text);
+                            await context.PostAsync(name);
+                            context.Wait(MessageReceivedAsync);
+                        } else if (index==slideCollection.Count)
+                        {
+                            var message = await argument;
+                            slideCollection[index - 1].time_taken = 600;
+                            slideCollection[index - 1].response = Convert.ToBoolean(message.Text);
+                            await context.PostAsync("Test finished");
+                            context.Wait(MessageReceivedAsync);
+                        }
+                    }                                            
                 }
                    
             }
