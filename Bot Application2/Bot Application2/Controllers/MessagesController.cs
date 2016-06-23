@@ -61,7 +61,8 @@ namespace Bot_Application2
                     {
                         string name = slideCollection[index].caption;
                         index++;
-                        await context.PostAsync(name);
+                        //await context.PostAsync(name);
+                        await context.PostAsync("![" + name + "](" + slideCollection[index-1].image_desktop + ")");
                         context.Wait(MessageReceivedAsync);
                     } else
                     {
@@ -72,7 +73,8 @@ namespace Bot_Application2
                             slideCollection[index - 1].time_taken = 600;
                             slideCollection[index - 1].response = true;
                             index++;
-                            await context.PostAsync(name);
+                            //await context.PostAsync(name);
+                            await context.PostAsync(index + "![" + name + "](" + slideCollection[index-1].image_desktop + ")");
                             context.Wait(MessageReceivedAsync);
                         } else if (index==slideCollection.Count)
                         {
@@ -87,12 +89,9 @@ namespace Bot_Application2
                             context.Wait(MessageReceivedAsync);
                         }
                     }                                            
-                }
-                   
+                }                 
             }
-
         }
-
     }
 
     [BotAuthentication]
@@ -112,56 +111,21 @@ namespace Bot_Application2
 
         private Message HandleSystemMessage(Message message)
         {
-            if (message.Type == "Ping")
+            if (message.Type == "BotAddedToConversation")
             {
-                Message reply = message.CreateReplyMessage();
-                reply.Type = "Ping";
+                Message reply = message.CreateReplyMessage("Hello and welcome to dialog! Type something to start.");
+                return reply;
+
+            }
+
+            if (message.Type == "BotRemovedFromConversation")
+            {
+                Message reply = message.CreateReplyMessage("Thank you! Hope to see you later.");
                 return reply;
             }
             return null;
         }
     }
-
-
-
 }
     
     
-
-
-
-
-
-    //[BotAuthentication]
-    //public class MessagesController : ApiController
-    //{
-    //    public int state = 1;
-
-    //    public async Task<Message> Post([FromBody]Message message)
-    //    {
-
-    //        if (message.Type == "Message"&&state==1)
-    //        {
-    //            state++;
-    //            TestType names = new TestType();            
-    //            var listOfDecks = string.Join(", ", names.GetNames().ToArray());
-    //            return message.CreateReplyMessage("Hello! Please, choose a topic: " + listOfDecks + state);
-    //        }
-    //        else
-    //        {
-    //            return HandleSystemMessage(message);
-    //        }
-    //    }
-
-    //    private Message HandleSystemMessage(Message message)
-    //    {
-
-    //        if (message.Type == "BotAddedToConversation")
-    //        {
-    //            Message reply = message.CreateReplyMessage();
-    //            reply.Type = "Welcome to Traitify bot! I will help you to determine your type of personality. Type begin to start conversation";
-    //            return reply;
-    //        }
-    //        return null;
-    //    }
-    //}
