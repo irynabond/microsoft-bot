@@ -13,7 +13,7 @@ namespace com.traitify.net.TraitifyLibrary
         [JsonProperty]
         public string id { get; set; }
         [JsonProperty]
-        public bool response { get; set; }
+        public Nullable<Boolean> response { get; set; }
         [JsonProperty]
         public int time_taken { get; set; }
     }

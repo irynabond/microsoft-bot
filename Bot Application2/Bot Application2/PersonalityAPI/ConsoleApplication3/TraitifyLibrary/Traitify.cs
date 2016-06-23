@@ -138,7 +138,7 @@ namespace com.traitify.net.TraitifyLibrary
             List<SlideSelected> SlidesList = new List<SlideSelected>();
             foreach (Slide slide in slides)
             {
-                SlidesList.Add(new SlideSelected() { id = slide.id, response = true, time_taken = 600 });
+                SlidesList.Add(new SlideSelected() { id = slide.id, response = slide.response, time_taken = 600 });
             }
             List<Slide> responseSlides = default(List<Slide>);
             using (var client = new HttpClient(new AuthHandler(_secretKey)) { BaseAddress = new Uri(_host) })

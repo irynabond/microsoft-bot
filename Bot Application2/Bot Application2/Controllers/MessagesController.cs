@@ -23,6 +23,7 @@ namespace Bot_Application2
     {
         bool showDecks = false;
         bool slideStarted = false;
+        bool response;
         int index = 0;
         string test_name;
         List<Slide> slideCollection;
@@ -52,7 +53,7 @@ namespace Bot_Application2
                     TestType slides = new TestType();
                     test_name = message.Text;
                     slideCollection = slides.GetSlides(test_name);
-                    await context.PostAsync("Type something to start");
+                    await context.PostAsync("Your test is ready! For the following questions type 1 if your answer is yes, type 2 if your answer is no. In order to start type Ready or Start.");
                     context.Wait(MessageReceivedAsync);
                 
                 } else
@@ -61,7 +62,6 @@ namespace Bot_Application2
                     {
                         string name = slideCollection[index].caption;
                         index++;
-                        //await context.PostAsync(name);
                         await context.PostAsync("![" + name + "](" + slideCollection[index-1].image_desktop + ")");
                         context.Wait(MessageReceivedAsync);
                     } else
@@ -69,21 +69,18 @@ namespace Bot_Application2
                         if (index < slideCollection.Count)
                         {
                             var message = await argument;
+                            response = (message.Text == "1") ? true : false;
                             string name = slideCollection[index].caption;                        
-                            slideCollection[index - 1].time_taken = 600;
-                            slideCollection[index - 1].response = true;
-                            index++;
-                            //await context.PostAsync(name);
-                            await context.PostAsync(index + "![" + name + "](" + slideCollection[index-1].image_desktop + ")");
+                            slideCollection[index - 1].response = response;
+                            index++;                            
+                            await context.PostAsync("![" + name + "](" + slideCollection[index-1].image_desktop + ")");
                             context.Wait(MessageReceivedAsync);
                         } else if (index==slideCollection.Count)
                         {
                             var message = await argument;
-                            slideCollection[index - 1].time_taken = 600;
-                            slideCollection[index - 1].response = true;
-
+                            response = (message.Text == "2") ? false : true;
+                            slideCollection[index - 1].response = response;
                             TestType result = new TestType();
-
                             string personality_type = result.Result("test", slideCollection);
                             await context.PostAsync(personality_type);
                             context.Wait(MessageReceivedAsync);
