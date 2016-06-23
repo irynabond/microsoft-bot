@@ -126,7 +126,7 @@ namespace Bot_Application2
         {
             if (message.Type == "BotAddedToConversation")
             {
-                Message reply = message.CreateReplyMessage("Hello and welcome to dialog! Type something to start.");
+                Message reply = message.CreateReplyMessage("Hello and welcome to your upcoming adventure in personality exploring! Are you ready to start?");
                 return reply;
 
             }
