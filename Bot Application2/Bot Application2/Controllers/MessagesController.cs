@@ -24,6 +24,7 @@ namespace Bot_Application2
         bool showDecks = false;
         bool slideStarted = false;
         int index = 0;
+        string test_name;
         List<Slide> slideCollection;
         public async Task StartAsync(IDialogContext context)
         {
@@ -49,7 +50,8 @@ namespace Bot_Application2
                     slideStarted = true;
                     var message = await argument;
                     TestType slides = new TestType();
-                    slideCollection = slides.GetSlides(message.Text);
+                    test_name = message.Text;
+                    slideCollection = slides.GetSlides(test_name);
                     await context.PostAsync("Type something to start");
                     context.Wait(MessageReceivedAsync);
                 
@@ -66,18 +68,22 @@ namespace Bot_Application2
                         if (index < slideCollection.Count)
                         {
                             var message = await argument;
-                            string name = slideCollection[index].caption;
-                            index++;
+                            string name = slideCollection[index].caption;                        
                             slideCollection[index - 1].time_taken = 600;
-                            slideCollection[index - 1].response = Convert.ToBoolean(message.Text);
+                            slideCollection[index - 1].response = true;
+                            index++;
                             await context.PostAsync(name);
                             context.Wait(MessageReceivedAsync);
                         } else if (index==slideCollection.Count)
                         {
                             var message = await argument;
                             slideCollection[index - 1].time_taken = 600;
-                            slideCollection[index - 1].response = Convert.ToBoolean(message.Text);
-                            await context.PostAsync("Test finished");
+                            slideCollection[index - 1].response = true;
+
+                            TestType result = new TestType();
+
+                            string personality_type = result.Result("test", slideCollection);
+                            await context.PostAsync(personality_type);
                             context.Wait(MessageReceivedAsync);
                         }
                     }                                            
@@ -92,13 +98,10 @@ namespace Bot_Application2
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-
         public async Task<Message> Post([FromBody]Message message)
         {
             if (message.Type == "Message")
-            {
-                
-
+            {               
                 return await Conversation.SendAsync(message, () => new PersonalityDialog());
             }
             else

@@ -6,11 +6,15 @@ using System.Text;
 
 namespace com.traitify.net.TraitifyLibrary
 {
+    [JsonObject(MemberSerialization.OptIn)]
     [Serializable]
     public class SlideSelected
     {
+        [JsonProperty]
         public string id { get; set; }
+        [JsonProperty]
         public bool response { get; set; }
+        [JsonProperty]
         public int time_taken { get; set; }
     }
     [JsonObject(MemberSerialization.OptIn)]

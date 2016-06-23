@@ -8,3 +8,13 @@ c:\users\iryna\documents\visual studio 2015\Projects\ConsoleApplication3\Console
 c:\users\iryna\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.exe
 c:\users\iryna\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.pdb
 c:\users\iryna\documents\visual studio 2015\Projects\ConsoleApplication3\ConsoleApplication3\bin\Debug\com.traitify.net.TraitifyLibrary.pdb
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\ConsoleApplication3.exe.config
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\obj\Debug\ConsoleApplication3.exe
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\obj\Debug\ConsoleApplication3.pdb
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\ConsoleApplication3.exe
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\ConsoleApplication3.pdb
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\com.traitify.net.TraitifyLibrary.dll
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\Newtonsoft.Json.dll
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\com.traitify.net.TraitifyLibrary.pdb
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\bin\Debug\Newtonsoft.Json.xml
+C:\Users\irusi\Desktop\projects\Traitify\Bot Application2\PersonalityAPI\ConsoleApplication3\obj\Debug\ConsoleApplication3.csprojResolveAssemblyReference.cache

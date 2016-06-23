@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 namespace com.traitify.net.TraitifyLibrary
 {
+
     public class Traitify
     {
         private string _host = String.Empty;
@@ -121,6 +122,7 @@ namespace com.traitify.net.TraitifyLibrary
                 var response = client.PutAsync(_version + "/assessments/" + assessment_id + "/slides", new StringContent(jsonSlides, Encoding.UTF8, "application/json")).Result;
                 string jsonSlideResult = response.Content.ReadAsStringAsync().Result;
                 responseSlide = JsonConvert.DeserializeObject<Slide>(jsonSlideResult);
+                
             }
             return responseSlide;
         }
@@ -133,7 +135,7 @@ namespace com.traitify.net.TraitifyLibrary
         /// <returns></returns>
         public List<Slide> SetSlideBulkUpdate(string assessmentId, List<Slide> slides)
         {
-            List<object> SlidesList = new List<object>();
+            List<SlideSelected> SlidesList = new List<SlideSelected>();
             foreach (Slide slide in slides)
             {
                 SlidesList.Add(new SlideSelected() { id = slide.id, response = true, time_taken = 600 });
@@ -145,7 +147,9 @@ namespace com.traitify.net.TraitifyLibrary
                 var jsonSlides = JsonConvert.SerializeObject(SlidesList);
                 var response = client.PutAsync(_version + "/assessments/" + assessmentId + "/slides", new StringContent(jsonSlides, Encoding.UTF8, "application/json")).Result;
                 responseSlides = JsonConvert.DeserializeObject<List<Slide>>(response.Content.ReadAsStringAsync().Result);
+                
             }
+
             return responseSlides;
         }
 
@@ -154,6 +158,8 @@ namespace com.traitify.net.TraitifyLibrary
         /// </summary>
         /// <param name="assessmentId"></param>
         /// <returns>List<PersonalityType></returns>
+        /// 
+       
         public AssessmentPersonalityTypes GetPersonalityTypes(string assessmentId)
         {
             //List<PersonalityType> personalityTypes = default(List<PersonalityType>);
