@@ -71,7 +71,8 @@ namespace Bot_Application2
                         {
                             string name = slideCollection[index].caption;
                             index++;
-                            await context.PostAsync("![" + name + "](" + slideCollection[index - 1].image_desktop + ")");
+                            await context.PostAsync(name);
+                            await context.PostAsync("![Show picture](" + slideCollection[index - 1].image_desktop + ")");
                             context.Wait(MessageReceivedAsync);
                         }
                         else
@@ -83,7 +84,8 @@ namespace Bot_Application2
                                 string name = slideCollection[index].caption;
                                 slideCollection[index - 1].response = response;
                                 index++;
-                                await context.PostAsync("![" + name + "](" + slideCollection[index - 1].image_desktop + ")");
+                                await context.PostAsync(name);     
+                                await context.PostAsync("![Show picture](" + slideCollection[index - 1].image_desktop + ")");                        
                                 context.Wait(MessageReceivedAsync);
                             }
                             else if (index == slideCollection.Count)

@@ -40,7 +40,7 @@ namespace TraitifyAPI
             traitify.SetSlideBulkUpdate(id, slides);
             AssessmentPersonalityTypes types = traitify.GetPersonalityTypes(id);
             List<AssessmentPersonalityType> personalityTypes = types.personality_types;
-            return "Your type of personality is " + personalityTypes[0].personality_type.name + "!" + "![](" + personalityTypes[0].personality_type.badge.image_small + ")" + personalityTypes[0].personality_type.description;
+            return "Your type of personality is " + personalityTypes[0].personality_type.name + "! "+ personalityTypes[0].personality_type.description;
         }
 
     }
